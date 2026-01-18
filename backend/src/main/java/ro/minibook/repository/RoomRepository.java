@@ -11,10 +11,10 @@ import java.util.Optional;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
-    // pentru validare nume unic
+
     boolean existsByNameIgnoreCase(String name);
 
-    // lock exclusiv pe room (evită race condition la booking)
+
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select r from Room r where r.id = :id")
     Optional<Room> findByIdForUpdate(@Param("id") Long id);

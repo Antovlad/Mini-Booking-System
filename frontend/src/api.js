@@ -9,16 +9,13 @@ async function req(path, options = {}) {
     },
   });
 
-  // success
   if (r.ok) {
     const contentType = r.headers.get("content-type") || "";
     if (!contentType.includes("application/json")) return null;
     return r.json();
   }
 
-  // error
   const text = await r.text();
-  // încearcă să scoți "message"/"error" dacă backend trimite JSON
   try {
     const obj = JSON.parse(text);
     const msg = obj.message || obj.error || text;

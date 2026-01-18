@@ -31,26 +31,21 @@ export default function BookingPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // rooms
   const [rooms, setRooms] = useState([]);
   const [selectedRoomId, setSelectedRoomId] = useState(null);
 
-  // create room form
   const [roomName, setRoomName] = useState("");
   const [roomCapacity, setRoomCapacity] = useState(8);
   const [roomBusy, setRoomBusy] = useState(false);
 
-  // availability
   const [fromLocal, setFromLocal] = useState("2026-01-01T09:00");
   const [toLocal, setToLocal] = useState("2026-01-01T13:00");
   const [availability, setAvailability] = useState(null);
   const [availBusy, setAvailBusy] = useState(false);
 
-  // bookings list
   const [bookings, setBookings] = useState([]);
   const [listBusy, setListBusy] = useState(false);
 
-  // create booking form
   const [startLocal, setStartLocal] = useState("2026-01-01T10:00");
   const [endLocal, setEndLocal] = useState("2026-01-01T11:00");
   const [createdBy, setCreatedBy] = useState("Antoniu");
@@ -66,7 +61,6 @@ export default function BookingPage() {
 
   function flashSuccess(msg) {
     setSuccess(msg);
-    // auto-hide după 2.5 sec
     setTimeout(() => setSuccess(""), 2500);
   }
 
@@ -95,12 +89,10 @@ export default function BookingPage() {
 
   useEffect(() => {
     loadRooms().catch((e) => setError(e.message));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (selectedRoomId) loadBookings(selectedRoomId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedRoomId]);
 
   async function onCreateRoom(e) {
@@ -267,7 +259,6 @@ export default function BookingPage() {
           </form>
         </div>
 
-        {/* AVAILABILITY + CREATE BOOKING */}
         <div style={{ border: "1px solid #eee", borderRadius: 14, padding: 16 }}>
           <h2 style={{ marginTop: 0 }}>Availability</h2>
 
@@ -349,7 +340,6 @@ export default function BookingPage() {
         </div>
       </div>
 
-      {/* BOOKINGS */}
       <div style={{ marginTop: 16, border: "1px solid #eee", borderRadius: 14, padding: 16 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <h2 style={{ marginTop: 0 }}>Bookings</h2>

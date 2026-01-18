@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // ========== 404 NOT FOUND ==========
+
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<?> handleNotFound(NoSuchElementException ex) {
         return ResponseEntity
@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
                 ));
     }
 
-    // ========== 409 CONFLICT (ex: booking overlap) ==========
+
     @ExceptionHandler(IllegalStateException.class)
     public ResponseEntity<?> handleConflict(IllegalStateException ex) {
         return ResponseEntity
@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
                 ));
     }
 
-    // ========== 400 BAD REQUEST ==========
+
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<?> handleBadRequest(IllegalArgumentException ex) {
         return ResponseEntity
@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
                 ));
     }
 
-    // ========== fallback (500 INTERNAL SERVER ERROR) ==========
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleUnexpected(Exception ex) {
         // în producție ai log aici
@@ -57,7 +57,7 @@ public class GlobalExceptionHandler {
                 ));
     }
 
-    // ========== helper ==========
+
     private Map<String, Object> error(HttpStatus status, String message) {
         return Map.of(
                 "timestamp", Instant.now().toString(),

@@ -25,7 +25,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     List<Booking> findByRoom_IdOrderByStartTimeAsc(Long roomId);
 
-    // Optional: lock bookings for a room to reduce race conditions in heavy concurrency
+
     @Lock(LockModeType.PESSIMISTIC_READ)
     @Query("select b from Booking b where b.room.id = :roomId")
     List<Booking> lockAllForRoom(@Param("roomId") Long roomId);

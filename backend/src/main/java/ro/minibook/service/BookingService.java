@@ -32,8 +32,7 @@ public class BookingService {
         Room room = roomRepo.findByIdForUpdate(req.roomId())
                 .orElseThrow(() -> new NoSuchElementException("Room not found"));
 
-        // (Optional) if you want to reduce race conditions:
-        // bookingRepo.lockAllForRoom(room.getId());
+        
 
         boolean overlap = bookingRepo.existsOverlap(room.getId(), req.startTime(), req.endTime());
         if (overlap) {

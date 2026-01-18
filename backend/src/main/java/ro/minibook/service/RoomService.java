@@ -74,15 +74,14 @@ public class RoomService {
         List<TimeSlotResponse> free = new java.util.ArrayList<>();
 
         for (var b : bookings) {
-            // dacă avem gap între cursor și start booking
             if (b.getStartTime().isAfter(cursor)) {
                 free.add(new TimeSlotResponse(cursor, b.getStartTime()));
             }
-            // cursor sare după booking (max, ca să unească overlap-uri)
+
             if (b.getEndTime().isAfter(cursor)) cursor = b.getEndTime();
         }
 
-        // gap final
+
         if (to.isAfter(cursor)) free.add(new TimeSlotResponse(cursor, to));
 
         return free;
